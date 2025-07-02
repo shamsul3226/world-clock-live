@@ -4,35 +4,63 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { Card, CardContent } from '@/components/ui/card';
-import { Clock } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Clock, Globe } from 'lucide-react';
 
 // Initialize dayjs plugins
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-interface CityTime {
-  city: string;
-  country: string;
+interface Country {
+  name: string;
   timezone: string;
   flag: string;
-  time: string;
-  date: string;
 }
+
+const countries: Country[] = [
+  { name: 'Afghanistan', timezone: 'Asia/Kabul', flag: '🇦🇫' },
+  { name: 'Albania', timezone: 'Europe/Tirane', flag: '🇦🇱' },
+  { name: 'Algeria', timezone: 'Africa/Algiers', flag: '🇩🇿' },
+  { name: 'Argentina', timezone: 'America/Argentina/Buenos_Aires', flag: '🇦🇷' },
+  { name: 'Australia', timezone: 'Australia/Sydney', flag: '🇦🇺' },
+  { name: 'Austria', timezone: 'Europe/Vienna', flag: '🇦🇹' },
+  { name: 'Bangladesh', timezone: 'Asia/Dhaka', flag: '🇧🇩' },
+  { name: 'Belgium', timezone: 'Europe/Brussels', flag: '🇧🇪' },
+  { name: 'Brazil', timezone: 'America/Sao_Paulo', flag: '🇧🇷' },
+  { name: 'Canada', timezone: 'America/Toronto', flag: '🇨🇦' },
+  { name: 'China', timezone: 'Asia/Shanghai', flag: '🇨🇳' },
+  { name: 'Egypt', timezone: 'Africa/Cairo', flag: '🇪🇬' },
+  { name: 'France', timezone: 'Europe/Paris', flag: '🇫🇷' },
+  { name: 'Germany', timezone: 'Europe/Berlin', flag: '🇩🇪' },
+  { name: 'India', timezone: 'Asia/Kolkata', flag: '🇮🇳' },
+  { name: 'Indonesia', timezone: 'Asia/Jakarta', flag: '🇮🇩' },
+  { name: 'Italy', timezone: 'Europe/Rome', flag: '🇮🇹' },
+  { name: 'Japan', timezone: 'Asia/Tokyo', flag: '🇯🇵' },
+  { name: 'Mexico', timezone: 'America/Mexico_City', flag: '🇲🇽' },
+  { name: 'Netherlands', timezone: 'Europe/Amsterdam', flag: '🇳🇱' },
+  { name: 'Nigeria', timezone: 'Africa/Lagos', flag: '🇳🇬' },
+  { name: 'Pakistan', timezone: 'Asia/Karachi', flag: '🇵🇰' },
+  { name: 'Philippines', timezone: 'Asia/Manila', flag: '🇵🇭' },
+  { name: 'Russia', timezone: 'Europe/Moscow', flag: '🇷🇺' },
+  { name: 'Saudi Arabia', timezone: 'Asia/Riyadh', flag: '🇸🇦' },
+  { name: 'Singapore', timezone: 'Asia/Singapore', flag: '🇸🇬' },
+  { name: 'South Africa', timezone: 'Africa/Johannesburg', flag: '🇿🇦' },
+  { name: 'South Korea', timezone: 'Asia/Seoul', flag: '🇰🇷' },
+  { name: 'Spain', timezone: 'Europe/Madrid', flag: '🇪🇸' },
+  { name: 'Thailand', timezone: 'Asia/Bangkok', flag: '🇹🇭' },
+  { name: 'Turkey', timezone: 'Europe/Istanbul', flag: '🇹🇷' },
+  { name: 'United Kingdom', timezone: 'Europe/London', flag: '🇬🇧' },
+  { name: 'United States (NY)', timezone: 'America/New_York', flag: '🇺🇸' },
+  { name: 'United States (LA)', timezone: 'America/Los_Angeles', flag: '🇺🇸' },
+  { name: 'Vietnam', timezone: 'Asia/Ho_Chi_Minh', flag: '🇻🇳' },
+];
 
 const WorldClock = () => {
   const [currentTime, setCurrentTime] = useState(dayjs());
   const [pulse, setPulse] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
-  const cities: Omit<CityTime, 'time' | 'date'>[] = [
-    { city: 'Kuala Lumpur', country: 'Malaysia', timezone: 'Asia/Kuala_Lumpur', flag: '🇲🇾' },
-    { city: 'Tokyo', country: 'Japan', timezone: 'Asia/Tokyo', flag: '🇯🇵' },
-    { city: 'New York', country: 'USA', timezone: 'America/New_York', flag: '🇺🇸' },
-    { city: 'London', country: 'UK', timezone: 'Europe/London', flag: '🇬🇧' },
-    { city: 'Sydney', country: 'Australia', timezone: 'Australia/Sydney', flag: '🇦🇺' },
-  ];
-
-  const mainCity = cities[0]; // Kuala Lumpur as main clock
-  const otherCities = cities.slice(1);
+  const mainCity = { city: 'Kuala Lumpur', country: 'Malaysia', timezone: 'Asia/Kuala_Lumpur', flag: '🇲🇾' };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,38 +86,38 @@ const WorldClock = () => {
   const mainTime = formatTime(mainCity.timezone);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Clock className="w-8 h-8 text-blue-400" />
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <Clock className="w-6 h-6 text-blue-400" />
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
               World Live Clock
             </h1>
           </div>
-          <p className="text-blue-200 text-lg">
+          <p className="text-blue-200 text-sm">
             Stay connected with time zones around the world
           </p>
         </div>
 
-        {/* Main Clock - Kuala Lumpur */}
-        <Card className="mb-8 md:mb-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-400/30 backdrop-blur-sm">
-          <CardContent className="p-6 md:p-8 text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <span className="text-4xl md:text-5xl">{mainCity.flag}</span>
+        {/* Main Clock - Malaysia */}
+        <Card className="mb-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-400/30 backdrop-blur-sm">
+          <CardContent className="p-4 md:p-6 text-center">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="text-2xl md:text-3xl">{mainCity.flag}</span>
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white">
+                <h2 className="text-xl md:text-2xl font-bold text-white">
                   {mainCity.city}
                 </h2>
-                <p className="text-blue-200 text-sm md:text-base">
+                <p className="text-blue-200 text-sm">
                   {mainCity.country}
                 </p>
               </div>
             </div>
             
-            <div className="space-y-2 md:space-y-4">
-              <div className="flex items-center justify-center gap-2 text-5xl md:text-7xl font-mono font-bold text-white">
+            <div className="space-y-2">
+              <div className="flex items-center justify-center gap-1 text-3xl md:text-5xl font-mono font-bold text-white">
                 <span>{mainTime.hours}</span>
                 <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
                 <span>{mainTime.minutes}</span>
@@ -98,58 +126,79 @@ const WorldClock = () => {
                   {mainTime.seconds}
                 </span>
               </div>
-              <p className="text-blue-200 text-lg md:text-xl">
+              <p className="text-blue-200 text-sm md:text-base">
                 {mainTime.date}
               </p>
             </div>
           </CardContent>
         </Card>
 
-        {/* World Clocks Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {otherCities.map((city, index) => {
-            const cityTime = formatTime(city.timezone);
-            return (
-              <Card 
-                key={city.timezone}
-                className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25"
-              >
-                <CardContent className="p-4 md:p-6 text-center">
-                  <div className="mb-3 md:mb-4">
-                    <div className="text-3xl md:text-4xl mb-2">
-                      {city.flag}
+        {/* Country Selector */}
+        <div className="mb-6">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Globe className="w-5 h-5 text-blue-400" />
+            <h3 className="text-lg font-semibold text-white">Select a Country</h3>
+          </div>
+          <div className="max-w-md mx-auto">
+            <Select onValueChange={(value) => {
+              const country = countries.find(c => c.name === value);
+              setSelectedCountry(country || null);
+            }}>
+              <SelectTrigger className="w-full bg-white/10 border-white/20 text-white backdrop-blur-sm">
+                <SelectValue placeholder="Choose a country..." />
+              </SelectTrigger>
+              <SelectContent className="bg-slate-800 border-slate-600 max-h-60">
+                {countries.map((country) => (
+                  <SelectItem 
+                    key={country.name} 
+                    value={country.name}
+                    className="text-white hover:bg-slate-700 focus:bg-slate-700"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span>{country.flag}</span>
+                      <span>{country.name}</span>
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-white mb-1">
-                      {city.city}
-                    </h3>
-                    <p className="text-blue-200 text-sm">
-                      {city.country}
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-center gap-1 text-2xl md:text-3xl font-mono font-bold text-white">
-                      <span>{cityTime.hours}</span>
-                      <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
-                      <span>{cityTime.minutes}</span>
-                      <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
-                      <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-blue-400' : 'scale-100'}`}>
-                        {cityTime.seconds}
-                      </span>
-                    </div>
-                    <p className="text-blue-200 text-xs md:text-sm">
-                      {cityTime.date}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
+        {/* Selected Country Clock */}
+        {selectedCountry && (
+          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
+            <CardContent className="p-4 md:p-6 text-center">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <span className="text-2xl md:text-3xl">{selectedCountry.flag}</span>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white">
+                    {selectedCountry.name}
+                  </h3>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <div className="flex items-center justify-center gap-1 text-2xl md:text-4xl font-mono font-bold text-white">
+                  <span>{formatTime(selectedCountry.timezone).hours}</span>
+                  <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
+                  <span>{formatTime(selectedCountry.timezone).minutes}</span>
+                  <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
+                  <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-blue-400' : 'scale-100'}`}>
+                    {formatTime(selectedCountry.timezone).seconds}
+                  </span>
+                </div>
+                <p className="text-blue-200 text-sm md:text-base">
+                  {formatTime(selectedCountry.timezone).date}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Footer */}
-        <div className="text-center mt-8 md:mt-12">
-          <p className="text-blue-300 text-sm">
+        <div className="text-center mt-4">
+          <p className="text-blue-300 text-xs">
             Live updates every second • Times are synchronized with your system clock
           </p>
         </div>
