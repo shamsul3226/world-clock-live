@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -6,7 +5,7 @@ import timezone from 'dayjs/plugin/timezone';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Clock, Globe } from 'lucide-react';
+import { Clock, Globe, Palette } from 'lucide-react';
 
 // Initialize dayjs plugins
 dayjs.extend(utc);
@@ -17,6 +16,40 @@ interface Country {
   timezone: string;
   flag: string;
 }
+
+interface Theme {
+  id: string;
+  name: string;
+  gradient: string;
+  overlay: string;
+}
+
+const themes: Theme[] = [
+  {
+    id: 'ocean',
+    name: 'Ocean Breeze',
+    gradient: 'from-emerald-400 via-cyan-500 to-blue-600',
+    overlay: 'from-pink-400/20 via-purple-500/20 to-indigo-500/20'
+  },
+  {
+    id: 'sunset',
+    name: 'Sunset Glow',
+    gradient: 'from-orange-400 via-pink-500 to-purple-600',
+    overlay: 'from-yellow-400/20 via-red-500/20 to-pink-500/20'
+  },
+  {
+    id: 'aurora',
+    name: 'Aurora',
+    gradient: 'from-green-400 via-teal-500 to-purple-600',
+    overlay: 'from-emerald-400/20 via-cyan-500/20 to-purple-500/20'
+  },
+  {
+    id: 'royal',
+    name: 'Royal',
+    gradient: 'from-purple-500 via-indigo-500 to-blue-700',
+    overlay: 'from-violet-400/20 via-blue-500/20 to-indigo-600/20'
+  }
+];
 
 const shortcutCountries: Country[] = [
   { name: 'United States', timezone: 'America/New_York', flag: '🇺🇸' },
@@ -123,6 +156,9 @@ const WorldClock = () => {
   const [pulse, setPulse] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [activeTab, setActiveTab] = useState('shortcuts');
+  const [selectedTheme, setSelectedTheme] = useState<string>(() => {
+    return localStorage.getItem('world-clock-theme') || 'ocean';
+  });
 
   const mainCity = { city: 'Kuala Lumpur', country: 'Malaysia', timezone: 'Asia/Kuala_Lumpur', flag: '🇲🇾' };
 
@@ -135,6 +171,10 @@ const WorldClock = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('world-clock-theme', selectedTheme);
+  }, [selectedTheme]);
 
   const formatTime = (timezone: string) => {
     const time = currentTime.tz(timezone);
@@ -153,6 +193,12 @@ const WorldClock = () => {
     setSelectedCountry(country);
   };
 
+  const handleThemeChange = (themeId: string) => {
+    setSelectedTheme(themeId);
+  };
+
+  const currentTheme = themes.find(theme => theme.id === selectedTheme) || themes[0];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 overflow-hidden">
       <div className="max-w-6xl mx-auto">
@@ -169,11 +215,42 @@ const WorldClock = () => {
           </p>
         </div>
 
-        {/* Main Clock - Malaysia with vibrant gradient */}
-        <Card className="mb-4 bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 border-transparent backdrop-blur-sm shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
+        {/* Theme Selector */}
+        <Card className="mb-4 bg-white/10 border-white/20 backdrop-blur-sm">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Palette className="w-5 h-5 text-blue-400" />
+              <h3 className="text-lg font-semibold text-white">Choose Theme</h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {themes.map((theme) => (
+                <button
+                  key={theme.id}
+                  onClick={() => handleThemeChange(theme.id)}
+                  className={`relative overflow-hidden rounded-lg p-4 transition-all duration-300 transform hover:scale-105 ${
+                    selectedTheme === theme.id 
+                      ? 'ring-2 ring-white/50 shadow-lg' 
+                      : 'hover:ring-1 hover:ring-white/30'
+                  }`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-r ${theme.gradient}`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-r ${theme.overlay} animate-pulse`}></div>
+                  <div className="relative z-10">
+                    <div className="text-white font-medium text-sm drop-shadow-lg">
+                      {theme.name}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Main Clock - Malaysia with dynamic theme */}
+        <Card className={`mb-4 bg-gradient-to-r ${currentTheme.gradient} border-transparent backdrop-blur-sm shadow-2xl transform hover:scale-[1.02] transition-all duration-300`}>
           <CardContent className="p-4 text-center relative overflow-hidden">
             {/* Animated gradient overlay for extra vibrancy */}
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-500/20 to-indigo-500/20 animate-pulse"></div>
+            <div className={`absolute inset-0 bg-gradient-to-r ${currentTheme.overlay} animate-pulse`}></div>
             
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2 mb-2">
