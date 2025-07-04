@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -5,7 +6,8 @@ import timezone from 'dayjs/plugin/timezone';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { Clock, Globe, Palette } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Clock, Globe, Palette, ChevronDown } from 'lucide-react';
 
 // Initialize dayjs plugins
 dayjs.extend(utc);
@@ -200,51 +202,53 @@ const WorldClock = () => {
   const currentTheme = themes.find(theme => theme.id === selectedTheme) || themes[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-4">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <Clock className="w-6 h-6 text-blue-400" />
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
-              World Live Clock
-            </h1>
-          </div>
-          <p className="text-blue-200 text-sm">
-            Stay connected with time zones around the world
-          </p>
-        </div>
-
-        {/* Theme Selector */}
-        <Card className="mb-4 bg-white/10 border-white/20 backdrop-blur-sm">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Palette className="w-5 h-5 text-blue-400" />
-              <h3 className="text-lg font-semibold text-white">Choose Theme</h3>
+    <div className={`min-h-screen bg-gradient-to-br ${currentTheme.gradient} p-4 overflow-hidden relative`}>
+      {/* Animated background overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-r ${currentTheme.overlay} animate-pulse pointer-events-none`}></div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header with Theme Selector */}
+        <div className="flex justify-between items-start mb-4">
+          <div className="text-center flex-1">
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <Clock className="w-6 h-6 text-white drop-shadow-lg" />
+              <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                World Live Clock
+              </h1>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <p className="text-white/90 text-sm drop-shadow">
+              Stay connected with time zones around the world
+            </p>
+          </div>
+
+          {/* Theme Selector Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white transition-all duration-200 hover:scale-105">
+                <Palette className="w-4 h-4" />
+                <span className="text-sm font-medium">{currentTheme.name}</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-slate-800/95 backdrop-blur-md border-slate-600 min-w-[180px]" align="end">
               {themes.map((theme) => (
-                <button
+                <DropdownMenuItem
                   key={theme.id}
                   onClick={() => handleThemeChange(theme.id)}
-                  className={`relative overflow-hidden rounded-lg p-4 transition-all duration-300 transform hover:scale-105 ${
-                    selectedTheme === theme.id 
-                      ? 'ring-2 ring-white/50 shadow-lg' 
-                      : 'hover:ring-1 hover:ring-white/30'
-                  }`}
+                  className="text-white hover:bg-slate-700/50 focus:bg-slate-700/50 cursor-pointer"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-r ${theme.gradient}`}></div>
-                  <div className={`absolute inset-0 bg-gradient-to-r ${theme.overlay} animate-pulse`}></div>
-                  <div className="relative z-10">
-                    <div className="text-white font-medium text-sm drop-shadow-lg">
-                      {theme.name}
-                    </div>
+                  <div className="flex items-center gap-3 w-full">
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${theme.gradient} border border-white/20`}></div>
+                    <span className="flex-1">{theme.name}</span>
+                    {selectedTheme === theme.id && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
                   </div>
-                </button>
+                </DropdownMenuItem>
               ))}
-            </div>
-          </CardContent>
-        </Card>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
 
         {/* Main Clock - Malaysia with dynamic theme */}
         <Card className={`mb-4 bg-gradient-to-r ${currentTheme.gradient} border-transparent backdrop-blur-sm shadow-2xl transform hover:scale-[1.02] transition-all duration-300`}>
@@ -286,10 +290,10 @@ const WorldClock = () => {
         {/* Country Selection Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-4">
           <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm">
-            <TabsTrigger value="shortcuts" className="text-white data-[state=active]:bg-blue-500/50">
+            <TabsTrigger value="shortcuts" className="text-white data-[state=active]:bg-white/20">
               Quick Select
             </TabsTrigger>
-            <TabsTrigger value="all" className="text-white data-[state=active]:bg-blue-500/50">
+            <TabsTrigger value="all" className="text-white data-[state=active]:bg-white/20">
               All Countries
             </TabsTrigger>
           </TabsList>
@@ -313,8 +317,8 @@ const WorldClock = () => {
           
           <TabsContent value="all" className="mt-3">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <Globe className="w-5 h-5 text-blue-400" />
-              <h3 className="text-lg font-semibold text-white">Select a Country</h3>
+              <Globe className="w-5 h-5 text-white drop-shadow" />
+              <h3 className="text-lg font-semibold text-white drop-shadow">Select a Country</h3>
             </div>
             <div className="max-w-md mx-auto">
               <Select onValueChange={(value) => {
@@ -324,12 +328,12 @@ const WorldClock = () => {
                 <SelectTrigger className="w-full bg-white/10 border-white/20 text-white backdrop-blur-sm">
                   <SelectValue placeholder="Choose a country..." />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-600 max-h-60">
+                <SelectContent className="bg-slate-800/95 backdrop-blur-md border-slate-600 max-h-60">
                   {allCountries.map((country) => (
                     <SelectItem 
                       key={country.name} 
                       value={country.name}
-                      className="text-white hover:bg-slate-700 focus:bg-slate-700"
+                      className="text-white hover:bg-slate-700/50 focus:bg-slate-700/50"
                     >
                       <div className="flex items-center gap-2">
                         <span>{country.flag}</span>
@@ -350,23 +354,23 @@ const WorldClock = () => {
               <div className="flex items-center justify-center gap-2 mb-2">
                 <span className="text-2xl">{selectedCountry.flag}</span>
                 <div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-bold text-white drop-shadow">
                     {selectedCountry.name}
                   </h3>
                 </div>
               </div>
               
               <div className="space-y-1">
-                <div className="flex items-center justify-center gap-1 text-2xl md:text-3xl font-mono font-bold text-white">
+                <div className="flex items-center justify-center gap-1 text-2xl md:text-3xl font-mono font-bold text-white drop-shadow">
                   <span>{formatTime(selectedCountry.timezone).hours}</span>
                   <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
                   <span>{formatTime(selectedCountry.timezone).minutes}</span>
                   <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
-                  <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-blue-400' : 'scale-100'}`}>
+                  <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-yellow-200' : 'scale-100'}`}>
                     {formatTime(selectedCountry.timezone).seconds}
                   </span>
                 </div>
-                <p className="text-blue-200 text-sm">
+                <p className="text-white/90 text-sm drop-shadow">
                   {formatTime(selectedCountry.timezone).date}
                 </p>
               </div>
@@ -376,7 +380,7 @@ const WorldClock = () => {
 
         {/* Footer */}
         <div className="text-center">
-          <p className="text-blue-300 text-xs">
+          <p className="text-white/80 text-xs drop-shadow">
             Live updates every second • Times are synchronized with your system clock
           </p>
         </div>
