@@ -169,34 +169,39 @@ const WorldClock = () => {
           </p>
         </div>
 
-        {/* Main Clock - Malaysia */}
-        <Card className="mb-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border-blue-400/30 backdrop-blur-sm">
-          <CardContent className="p-4 text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="text-2xl">{mainCity.flag}</span>
-              <div>
-                <h2 className="text-xl font-bold text-white">
-                  {mainCity.city}
-                </h2>
-                <p className="text-blue-200 text-sm">
-                  {mainCity.country}
+        {/* Main Clock - Malaysia with vibrant gradient */}
+        <Card className="mb-4 bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 border-transparent backdrop-blur-sm shadow-2xl transform hover:scale-[1.02] transition-all duration-300">
+          <CardContent className="p-4 text-center relative overflow-hidden">
+            {/* Animated gradient overlay for extra vibrancy */}
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-400/20 via-purple-500/20 to-indigo-500/20 animate-pulse"></div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <span className="text-2xl drop-shadow-lg">{mainCity.flag}</span>
+                <div>
+                  <h2 className="text-xl font-bold text-white drop-shadow-lg">
+                    {mainCity.city}
+                  </h2>
+                  <p className="text-white/90 text-sm drop-shadow">
+                    {mainCity.country}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-1">
+                <div className="flex items-center justify-center gap-1 text-3xl md:text-4xl font-mono font-bold text-white drop-shadow-lg">
+                  <span>{mainTime.hours}</span>
+                  <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
+                  <span>{mainTime.minutes}</span>
+                  <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
+                  <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-yellow-200' : 'scale-100'}`}>
+                    {mainTime.seconds}
+                  </span>
+                </div>
+                <p className="text-white/90 text-sm drop-shadow">
+                  {mainTime.date}
                 </p>
               </div>
-            </div>
-            
-            <div className="space-y-1">
-              <div className="flex items-center justify-center gap-1 text-3xl md:text-4xl font-mono font-bold text-white">
-                <span>{mainTime.hours}</span>
-                <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
-                <span>{mainTime.minutes}</span>
-                <span className={`transition-opacity duration-100 ${pulse ? 'opacity-50' : 'opacity-100'}`}>:</span>
-                <span className={`transition-all duration-100 ${pulse ? 'scale-110 text-blue-400' : 'scale-100'}`}>
-                  {mainTime.seconds}
-                </span>
-              </div>
-              <p className="text-blue-200 text-sm">
-                {mainTime.date}
-              </p>
             </div>
           </CardContent>
         </Card>
