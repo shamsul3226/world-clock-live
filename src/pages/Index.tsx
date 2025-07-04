@@ -40,10 +40,10 @@ const themes: Theme[] = [
     overlay: 'from-yellow-400/20 via-red-500/20 to-pink-500/20'
   },
   {
-    id: 'aurora',
-    name: 'Aurora',
-    gradient: 'from-green-400 via-teal-500 to-purple-600',
-    overlay: 'from-emerald-400/20 via-cyan-500/20 to-purple-500/20'
+    id: 'classic',
+    name: 'Classic Blue',
+    gradient: 'from-blue-400 via-blue-500 to-blue-600', 
+    overlay: 'from-blue-400/20 via-blue-500/20 to-blue-600/20'
   },
   {
     id: 'royal',
