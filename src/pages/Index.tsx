@@ -38,130 +38,130 @@ interface Theme {
 
 const themes: Theme[] = [
   {
-    id: 'golden',
-  name: 'Golden Mirage',
-  gradient: 'from-gray-900 via-blue-900 to-slate-700',
-  overlay: 'from-blue-400/20 via-orange-300/20 to-orange-gray-900/20'
+    id: "golden",
+    name: "Golden Mirage",
+    gradient: "from-gray-900 via-blue-900 to-slate-700",
+    overlay: "from-blue-400/20 via-orange-300/20 to-orange-gray-900/20",
   },
   {
-     id: 'mint',
-  name: 'Mint Whirl',
-  gradient: 'from-teal-400 via-teal-400 to-emerald-200',
-  overlay: 'from-lime-200/20 via-lime-100/20 to-cyan-100/20'
-
+    id: "mint",
+    name: "Mint Whirl",
+    gradient: "from-teal-400 via-teal-400 to-emerald-200",
+    overlay: "from-lime-200/20 via-lime-100/20 to-cyan-100/20",
   },
   {
-    id: 'solar',
-  name: 'Solar Drift',
-  gradient: 'from-yellow-400 via-amber-500 to-fuchsia-600',
-  overlay: 'from-orange-300/20 via-pink-400/20 to-purple-500/20'
+    id: "solar",
+    name: "Solar Drift",
+    gradient: "from-yellow-400 via-amber-500 to-fuchsia-600",
+    overlay: "from-orange-300/20 via-pink-400/20 to-purple-500/20",
   },
   {
-     id: 'cyber',
-  name: 'Cyber Bloom',
-  gradient: 'from-fuchsia-500 via-violet-600 to-indigo-700',
-  overlay: 'from-lime-400/20 via-cyan-500/20 to-pink-400/20'
+    id: "cyber",
+    name: "Cyber Bloom",
+    gradient: "from-fuchsia-500 via-violet-600 to-indigo-700",
+    overlay: "from-lime-400/20 via-cyan-500/20 to-pink-400/20",
   },
 ];
 
 const shortcutCountries: Country[] = [
-  { name: "United States", timezone: "America/New_York", flag: "🇺🇸" },
-  { name: "United Kingdom", timezone: "Europe/London", flag: "🇬🇧" },
-  { name: "Japan", timezone: "Asia/Tokyo", flag: "🇯🇵" },
-  { name: "Australia", timezone: "Australia/Sydney", flag: "🇦🇺" },
-  { name: "Germany", timezone: "Europe/Berlin", flag: "🇩🇪" },
-  { name: "China", timezone: "Asia/Shanghai", flag: "🇨🇳" },
+  { name: "United States", timezone: "America/New_York", flag: "us" },
+  { name: "United Kingdom", timezone: "Europe/London", flag: "gb" },
+  { name: "Japan", timezone: "Asia/Tokyo", flag: "jp" },
+  { name: "Australia", timezone: "Australia/Sydney", flag: "au" },
+  { name: "Germany", timezone: "Europe/Berlin", flag: "de" },
+  { name: "China", timezone: "Asia/Shanghai", flag: "cn" },
 ];
 
 const allCountries: Country[] = [
-  { name: "Afghanistan", timezone: "Asia/Kabul", flag: "🇦🇫" },
-  { name: "Albania", timezone: "Europe/Tirane", flag: "🇦🇱" },
-  { name: "Algeria", timezone: "Africa/Algiers", flag: "🇩🇿" },
-  { name: "Argentina", timezone: "America/Argentina/Buenos_Aires", flag: "🇦🇷" },
-  { name: "Armenia", timezone: "Asia/Yerevan", flag: "🇦🇲" },
-  { name: "Australia", timezone: "Australia/Sydney", flag: "🇦🇺" },
-  { name: "Austria", timezone: "Europe/Vienna", flag: "🇦🇹" },
-  { name: "Azerbaijan", timezone: "Asia/Baku", flag: "🇦🇿" },
-  { name: "Bahrain", timezone: "Asia/Bahrain", flag: "🇧🇭" },
-  { name: "Bangladesh", timezone: "Asia/Dhaka", flag: "🇧🇩" },
-  { name: "Belarus", timezone: "Europe/Minsk", flag: "🇧🇾" },
-  { name: "Belgium", timezone: "Europe/Brussels", flag: "🇧🇪" },
-  { name: "Bolivia", timezone: "America/La_Paz", flag: "🇧🇴" },
-  { name: "Brazil", timezone: "America/Sao_Paulo", flag: "🇧🇷" },
-  { name: "Bulgaria", timezone: "Europe/Sofia", flag: "🇧🇬" },
-  { name: "Cambodia", timezone: "Asia/Phnom_Penh", flag: "🇰🇭" },
-  { name: "Canada", timezone: "America/Toronto", flag: "🇨🇦" },
-  { name: "Chile", timezone: "America/Santiago", flag: "🇨🇱" },
-  { name: "China", timezone: "Asia/Shanghai", flag: "🇨🇳" },
-  { name: "Colombia", timezone: "America/Bogota", flag: "🇨🇴" },
-  { name: "Croatia", timezone: "Europe/Zagreb", flag: "🇭🇷" },
-  { name: "Czech Republic", timezone: "Europe/Prague", flag: "🇨🇿" },
-  { name: "Denmark", timezone: "Europe/Copenhagen", flag: "🇩🇰" },
-  { name: "Ecuador", timezone: "America/Guayaquil", flag: "🇪🇨" },
-  { name: "Egypt", timezone: "Africa/Cairo", flag: "🇪🇬" },
-  { name: "Estonia", timezone: "Europe/Tallinn", flag: "🇪🇪" },
-  { name: "Ethiopia", timezone: "Africa/Addis_Ababa", flag: "🇪🇹" },
-  { name: "Finland", timezone: "Europe/Helsinki", flag: "🇫🇮" },
-  { name: "France", timezone: "Europe/Paris", flag: "🇫🇷" },
-  { name: "Georgia", timezone: "Asia/Tbilisi", flag: "🇬🇪" },
-  { name: "Germany", timezone: "Europe/Berlin", flag: "🇩🇪" },
-  { name: "Ghana", timezone: "Africa/Accra", flag: "🇬🇭" },
-  { name: "Greece", timezone: "Europe/Athens", flag: "🇬🇷" },
-  { name: "Hungary", timezone: "Europe/Budapest", flag: "🇭🇺" },
-  { name: "Iceland", timezone: "Atlantic/Reykjavik", flag: "🇮🇸" },
-  { name: "India", timezone: "Asia/Kolkata", flag: "🇮🇳" },
-  { name: "Indonesia", timezone: "Asia/Jakarta", flag: "🇮🇩" },
-  { name: "Iran", timezone: "Asia/Tehran", flag: "🇮🇷" },
-  { name: "Iraq", timezone: "Asia/Baghdad", flag: "🇮🇶" },
-  { name: "Ireland", timezone: "Europe/Dublin", flag: "🇮🇪" },
-  { name: "Israel", timezone: "Asia/Jerusalem", flag: "🇮🇱" },
-  { name: "Italy", timezone: "Europe/Rome", flag: "🇮🇹" },
-  { name: "Japan", timezone: "Asia/Tokyo", flag: "🇯🇵" },
-  { name: "Jordan", timezone: "Asia/Amman", flag: "🇯🇴" },
-  { name: "Kazakhstan", timezone: "Asia/Almaty", flag: "🇰🇿" },
-  { name: "Kenya", timezone: "Africa/Nairobi", flag: "🇰🇪" },
-  { name: "Kuwait", timezone: "Asia/Kuwait", flag: "🇰🇼" },
-  { name: "Latvia", timezone: "Europe/Riga", flag: "🇱🇻" },
-  { name: "Lebanon", timezone: "Asia/Beirut", flag: "🇱🇧" },
-  { name: "Lithuania", timezone: "Europe/Vilnius", flag: "🇱🇹" },
-  { name: "Luxembourg", timezone: "Europe/Luxembourg", flag: "🇱🇺" },
-  { name: "Mexico", timezone: "America/Mexico_City", flag: "🇲🇽" },
-  { name: "Morocco", timezone: "Africa/Casablanca", flag: "🇲🇦" },
-  { name: "Netherlands", timezone: "Europe/Amsterdam", flag: "🇳🇱" },
-  { name: "New Zealand", timezone: "Pacific/Auckland", flag: "🇳🇿" },
-  { name: "Nigeria", timezone: "Africa/Lagos", flag: "🇳🇬" },
-  { name: "Norway", timezone: "Europe/Oslo", flag: "🇳🇴" },
-  { name: "Oman", timezone: "Asia/Muscat", flag: "🇴🇲" },
-  { name: "Pakistan", timezone: "Asia/Karachi", flag: "🇵🇰" },
-  { name: "Peru", timezone: "America/Lima", flag: "🇵🇪" },
-  { name: "Philippines", timezone: "Asia/Manila", flag: "🇵🇭" },
-  { name: "Poland", timezone: "Europe/Warsaw", flag: "🇵🇱" },
-  { name: "Portugal", timezone: "Europe/Lisbon", flag: "🇵🇹" },
-  { name: "Qatar", timezone: "Asia/Qatar", flag: "🇶🇦" },
-  { name: "Romania", timezone: "Europe/Bucharest", flag: "🇷🇴" },
-  { name: "Russia", timezone: "Europe/Moscow", flag: "🇷🇺" },
-  { name: "Saudi Arabia", timezone: "Asia/Riyadh", flag: "🇸🇦" },
-  { name: "Serbia", timezone: "Europe/Belgrade", flag: "🇷🇸" },
-  { name: "Singapore", timezone: "Asia/Singapore", flag: "🇸🇬" },
-  { name: "Slovakia", timezone: "Europe/Bratislava", flag: "🇸🇰" },
-  { name: "Slovenia", timezone: "Europe/Ljubljana", flag: "🇸🇮" },
-  { name: "South Africa", timezone: "Africa/Johannesburg", flag: "🇿🇦" },
-  { name: "South Korea", timezone: "Asia/Seoul", flag: "🇰🇷" },
-  { name: "Spain", timezone: "Europe/Madrid", flag: "🇪🇸" },
-  { name: "Sri Lanka", timezone: "Asia/Colombo", flag: "🇱🇰" },
-  { name: "Sweden", timezone: "Europe/Stockholm", flag: "🇸🇪" },
-  { name: "Switzerland", timezone: "Europe/Zurich", flag: "🇨🇭" },
-  { name: "Taiwan", timezone: "Asia/Taipei", flag: "🇹🇼" },
-  { name: "Thailand", timezone: "Asia/Bangkok", flag: "🇹🇭" },
-  { name: "Turkey", timezone: "Europe/Istanbul", flag: "🇹🇷" },
-  { name: "Ukraine", timezone: "Europe/Kiev", flag: "🇺🇦" },
-  { name: "United Arab Emirates", timezone: "Asia/Dubai", flag: "🇦🇪" },
-  { name: "United Kingdom", timezone: "Europe/London", flag: "🇬🇧" },
-  { name: "United States (NY)", timezone: "America/New_York", flag: "🇺🇸" },
-  { name: "United States (LA)", timezone: "America/Los_Angeles", flag: "🇺🇸" },
-  { name: "Uruguay", timezone: "America/Montevideo", flag: "🇺🇾" },
-  { name: "Venezuela", timezone: "America/Caracas", flag: "🇻🇪" },
-  { name: "Vietnam", timezone: "Asia/Ho_Chi_Minh", flag: "🇻🇳" },
+  { name: "Afghanistan", timezone: "Asia/Kabul", flag: "af" },
+  { name: "Albania", timezone: "Europe/Tirane", flag: "al" },
+  { name: "Algeria", timezone: "Africa/Algiers", flag: "dz" },
+  { name: "Argentina", timezone: "America/Argentina/Buenos_Aires", flag: "ar" },
+  { name: "Armenia", timezone: "Asia/Yerevan", flag: "am" },
+  { name: "Australia", timezone: "Australia/Sydney", flag: "au" },
+  { name: "Austria", timezone: "Europe/Vienna", flag: "at" },
+  { name: "Azerbaijan", timezone: "Asia/Baku", flag: "az" },
+  { name: "Bahrain", timezone: "Asia/Bahrain", flag: "bh" },
+  { name: "Bangladesh", timezone: "Asia/Dhaka", flag: "bd" },
+  { name: "Belarus", timezone: "Europe/Minsk", flag: "by" },
+  { name: "Belgium", timezone: "Europe/Brussels", flag: "be" },
+  { name: "Bolivia", timezone: "America/La_Paz", flag: "bo" },
+  { name: "Brazil", timezone: "America/Sao_Paulo", flag: "br" },
+  { name: "Bulgaria", timezone: "Europe/Sofia", flag: "bg" },
+  { name: "Cambodia", timezone: "Asia/Phnom_Penh", flag: "kh" },
+  { name: "Canada", timezone: "America/Toronto", flag: "ca" },
+  { name: "Chile", timezone: "America/Santiago", flag: "cl" },
+  { name: "China", timezone: "Asia/Shanghai", flag: "cn" },
+  { name: "Colombia", timezone: "America/Bogota", flag: "co" },
+  { name: "Croatia", timezone: "Europe/Zagreb", flag: "hr" },
+  { name: "Czech Republic", timezone: "Europe/Prague", flag: "cz" },
+  { name: "Denmark", timezone: "Europe/Copenhagen", flag: "dk" },
+  { name: "Ecuador", timezone: "America/Guayaquil", flag: "ec" },
+  { name: "Egypt", timezone: "Africa/Cairo", flag: "eg" },
+  { name: "Estonia", timezone: "Europe/Tallinn", flag: "ee" },
+  { name: "Ethiopia", timezone: "Africa/Addis_Ababa", flag: "et" },
+  { name: "Finland", timezone: "Europe/Helsinki", flag: "fi" },
+  { name: "France", timezone: "Europe/Paris", flag: "fr" },
+  { name: "Georgia", timezone: "Asia/Tbilisi", flag: "ge" },
+  { name: "Germany", timezone: "Europe/Berlin", flag: "de" },
+  { name: "Ghana", timezone: "Africa/Accra", flag: "gh" },
+  { name: "Greece", timezone: "Europe/Athens", flag: "gr" },
+  { name: "Hungary", timezone: "Europe/Budapest", flag: "hu" },
+  { name: "Iceland", timezone: "Atlantic/Reykjavik", flag: "is" },
+  { name: "India", timezone: "Asia/Kolkata", flag: "in" },
+  { name: "Indonesia", timezone: "Asia/Jakarta", flag: "id" },
+  { name: "Iran", timezone: "Asia/Tehran", flag: "ir" },
+  { name: "Iraq", timezone: "Asia/Baghdad", flag: "iq" },
+  { name: "Ireland", timezone: "Europe/Dublin", flag: "ie" },
+  { name: "Israel", timezone: "Asia/Jerusalem", flag: "il" },
+  { name: "Italy", timezone: "Europe/Rome", flag: "it" },
+  { name: "Japan", timezone: "Asia/Tokyo", flag: "jp" },
+  { name: "Jordan", timezone: "Asia/Amman", flag: "jo" },
+  { name: "Kazakhstan", timezone: "Asia/Almaty", flag: "kz" },
+  { name: "Kenya", timezone: "Africa/Nairobi", flag: "ke" },
+  { name: "Kuwait", timezone: "Asia/Kuwait", flag: "kw" },
+  { name: "Latvia", timezone: "Europe/Riga", flag: "lv" },
+  { name: "Lebanon", timezone: "Asia/Beirut", flag: "lb" },
+  { name: "Lithuania", timezone: "Europe/Vilnius", flag: "lt" },
+  { name: "Luxembourg", timezone: "Europe/Luxembourg", flag: "lu" },
+  { name: "Malaysia", timezone: "Asia/Kuala_Lumpur", flag: "my" },
+  { name: "Mexico", timezone: "America/Mexico_City", flag: "mx" },
+  { name: "Morocco", timezone: "Africa/Casablanca", flag: "ma" },
+  { name: "Netherlands", timezone: "Europe/Amsterdam", flag: "nl" },
+  { name: "New Zealand", timezone: "Pacific/Auckland", flag: "nz" },
+  { name: "Nigeria", timezone: "Africa/Lagos", flag: "ng" },
+  { name: "Norway", timezone: "Europe/Oslo", flag: "no" },
+  { name: "Oman", timezone: "Asia/Muscat", flag: "om" },
+  { name: "Pakistan", timezone: "Asia/Karachi", flag: "pk" },
+  { name: "Peru", timezone: "America/Lima", flag: "pe" },
+  { name: "Philippines", timezone: "Asia/Manila", flag: "ph" },
+  { name: "Poland", timezone: "Europe/Warsaw", flag: "pl" },
+  { name: "Portugal", timezone: "Europe/Lisbon", flag: "pt" },
+  { name: "Qatar", timezone: "Asia/Qatar", flag: "qa" },
+  { name: "Romania", timezone: "Europe/Bucharest", flag: "ro" },
+  { name: "Russia", timezone: "Europe/Moscow", flag: "ru" },
+  { name: "Saudi Arabia", timezone: "Asia/Riyadh", flag: "sa" },
+  { name: "Serbia", timezone: "Europe/Belgrade", flag: "rs" },
+  { name: "Singapore", timezone: "Asia/Singapore", flag: "sg" },
+  { name: "Slovakia", timezone: "Europe/Bratislava", flag: "sk" },
+  { name: "Slovenia", timezone: "Europe/Ljubljana", flag: "si" },
+  { name: "South Africa", timezone: "Africa/Johannesburg", flag: "za" },
+  { name: "South Korea", timezone: "Asia/Seoul", flag: "kr" },
+  { name: "Spain", timezone: "Europe/Madrid", flag: "es" },
+  { name: "Sri Lanka", timezone: "Asia/Colombo", flag: "lk" },
+  { name: "Sweden", timezone: "Europe/Stockholm", flag: "se" },
+  { name: "Switzerland", timezone: "Europe/Zurich", flag: "ch" },
+  { name: "Taiwan", timezone: "Asia/Taipei", flag: "tw" },
+  { name: "Thailand", timezone: "Asia/Bangkok", flag: "th" },
+  { name: "Turkey", timezone: "Europe/Istanbul", flag: "tr" },
+  { name: "Ukraine", timezone: "Europe/Kiev", flag: "ua" },
+  { name: "United Arab Emirates", timezone: "Asia/Dubai", flag: "ae" },
+  { name: "United Kingdom", timezone: "Europe/London", flag: "gb" },
+  { name: "United States (NY)", timezone: "America/New_York", flag: "us" },
+  { name: "United States (LA)", timezone: "America/Los_Angeles", flag: "us" },
+  { name: "Uruguay", timezone: "America/Montevideo", flag: "uy" },
+  { name: "Venezuela", timezone: "America/Caracas", flag: "ve" },
+  { name: "Vietnam", timezone: "Asia/Ho_Chi_Minh", flag: "vn" },
 ];
 
 const WorldClock = () => {
@@ -177,7 +177,7 @@ const WorldClock = () => {
     city: "Kuala Lumpur",
     country: "Malaysia",
     timezone: "Asia/Kuala_Lumpur",
-    flag: "🇲🇾",
+    flag: <img alt="Malaysia Flag" src={`https://flagcdn.com/24x18/my.png`} />,
   };
 
   useEffect(() => {
@@ -231,7 +231,7 @@ const WorldClock = () => {
         {/* Header with Theme Selector */}
         <div className="flex justify-between items-start mb-4">
           <div className="text-center flex-1  my-10">
-            <div className="flex items-center mb-5 justify-center gap-3 mb-2">
+            <div className="flex items-center mb-5 justify-center gap-3">
               <Clock className="w-6 h-6 text-white drop-shadow-lg" />
               <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
                 World Live Clock
@@ -359,7 +359,16 @@ const WorldClock = () => {
                   className="bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg p-2 text-white transition-all duration-200 hover:scale-105 backdrop-blur-sm"
                 >
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-lg">{country.flag}</span>
+                    <span className="text-lg">
+                      <img
+                        src={`https://flagcdn.com/24x18/${country.flag}.png`}
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                        alt={`${country.name} Flag`}
+                        className="w-5 h-3 mr-2"
+                      />
+                    </span>
                     <span className="text-xs font-medium text-center">
                       {country.name}
                     </span>
@@ -394,8 +403,18 @@ const WorldClock = () => {
                       className="text-white hover:bg-slate-700/50 focus:bg-slate-700/50"
                     >
                       <div className="flex items-center gap-2">
-                        <span>{country.flag}</span>
-                        <span>{country.name}</span>
+                        <img
+                          src={`https://flagcdn.com/24x18/${country.flag}.png`}
+                          onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                          }}
+                          alt={`${country.name} Flag`}
+                          className="w-5 h-3 mr-2"
+                        />
+
+                        <span className="text-sm font-medium">
+                          {country.name}
+                        </span>
                       </div>
                     </SelectItem>
                   ))}
@@ -410,7 +429,15 @@ const WorldClock = () => {
           <Card className="bg-white/10 border-white/20 backdrop-blur-sm mb-4">
             <CardContent className="p-4 text-center">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <span className="text-2xl">{selectedCountry.flag}</span>
+                <img
+                  src={`https://flagcdn.com/24x18/${selectedCountry.flag}.png`}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                  alt={`${selectedCountry.name} Flag`}
+                  className="w-5 h-3 mr-2"
+                />
+
                 <div>
                   <h3 className="text-xl font-bold text-white drop-shadow">
                     {selectedCountry.name}
@@ -457,6 +484,9 @@ const WorldClock = () => {
           <p className="text-white/80 text-xs drop-shadow">
             Live updates every second • Times are synchronized with your system
             clock
+          </p>
+          <p className="text-white/60 text-xs mt-2 fixed bottom-4 left-0 right-0 w-full">
+            Made with ❤️ by {"Shamsul-Ariff"}
           </p>
         </div>
       </div>
