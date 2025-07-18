@@ -113,7 +113,6 @@ const allCountries: Country[] = [
   { name: "Iran", timezone: "Asia/Tehran", flag: "ir" },
   { name: "Iraq", timezone: "Asia/Baghdad", flag: "iq" },
   { name: "Ireland", timezone: "Europe/Dublin", flag: "ie" },
-  { name: "Israel", timezone: "Asia/Jerusalem", flag: "il" },
   { name: "Italy", timezone: "Europe/Rome", flag: "it" },
   { name: "Japan", timezone: "Asia/Tokyo", flag: "jp" },
   { name: "Jordan", timezone: "Asia/Amman", flag: "jo" },
@@ -133,6 +132,7 @@ const allCountries: Country[] = [
   { name: "Norway", timezone: "Europe/Oslo", flag: "no" },
   { name: "Oman", timezone: "Asia/Muscat", flag: "om" },
   { name: "Pakistan", timezone: "Asia/Karachi", flag: "pk" },
+  { name: "Palestine", timezone: "Asia/Gaza", flag: "ps" },
   { name: "Peru", timezone: "America/Lima", flag: "pe" },
   { name: "Philippines", timezone: "Asia/Manila", flag: "ph" },
   { name: "Poland", timezone: "Europe/Warsaw", flag: "pl" },
@@ -214,6 +214,11 @@ const WorldClock = () => {
   const handleThemeChange = (themeId: string) => {
     setSelectedTheme(themeId);
   };
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredCountries = allCountries.filter((country) =>
+    country.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const currentTheme =
     themes.find((theme) => theme.id === selectedTheme) || themes[0];
@@ -379,49 +384,61 @@ const WorldClock = () => {
           </TabsContent>
 
           <TabsContent value="all" className="mt-3">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Globe className="w-5 h-5 text-white drop-shadow" />
-              <h3 className="text-lg font-semibold text-white drop-shadow">
-                Select a Country
-              </h3>
-            </div>
-            <div className="max-w-md mx-auto">
-              <Select
-                onValueChange={(value) => {
-                  const country = allCountries.find((c) => c.name === value);
-                  if (country) handleCountrySelect(country);
-                }}
-              >
-                <SelectTrigger className="w-full bg-white/10 border-white/20 text-white backdrop-blur-sm">
-                  <SelectValue placeholder="Choose a country..." />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-800/95 backdrop-blur-md border-slate-600 max-h-60">
-                  {allCountries.map((country) => (
-                    <SelectItem
-                      key={country.name}
-                      value={country.name}
-                      className="text-white hover:bg-slate-700/50 focus:bg-slate-700/50"
-                    >
-                      <div className="flex items-center gap-2">
-                        <img
-                          src={`https://flagcdn.com/24x18/${country.flag}.png`}
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                          }}
-                          alt={`${country.name} Flag`}
-                          className="w-5 h-3 mr-2"
-                        />
+      <div className="flex items-center justify-center gap-2 mb-3">
+        <Globe className="w-5 h-5 text-white drop-shadow" />
+        <h3 className="text-lg font-semibold text-white drop-shadow">
+          Select a Country
+        </h3>
+      </div>
 
-                        <span className="text-sm font-medium">
-                          {country.name}
-                        </span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+      <div className="max-w-md mx-auto">
+        <Select
+          onValueChange={(value) => {
+            const country = allCountries.find((c) => c.name === value);
+            if (country) handleCountrySelect(country);
+          }}
+        >
+          <SelectTrigger className="w-full bg-white/10 border-white/20 text-white backdrop-blur-sm">
+            <SelectValue placeholder="Choose a country..." />
+          </SelectTrigger>
+
+          <SelectContent className="bg-slate-800/95 backdrop-blur-md border-slate-600 max-h-60 overflow-y-auto">
+            {/* 🔍 Search Input */}
+            <div className="px-3 py-2 sticky top-0 bg-slate-800/95 z-10">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="input input-sm w-full bg-white/10 text-white placeholder-white/70"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-          </TabsContent>
+
+            {/* 🌍 Filtered Country List */}
+            {filteredCountries.map((country) => (
+              <SelectItem
+                key={country.name}
+                value={country.name}
+                className="text-white hover:bg-slate-700/50 focus:bg-slate-700/50"
+              >
+                <div className="flex items-center gap-2">
+                  <img
+                    src={`https://flagcdn.com/24x18/${country.flag}.png`}
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
+                    alt={`${country.name} Flag`}
+                    className="w-5 h-3 mr-2"
+                  />
+                  <span className="text-sm font-medium">{country.name}</span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </TabsContent>
+
         </Tabs>
 
         {/* Selected Country Clock */}
